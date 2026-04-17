@@ -2,7 +2,7 @@ import AuthForm from "../components/AuthForm/AuthForm";
 
 interface LoginProps {
     onToggleMode?: () => void;
-    onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+    onSubmit?: (email: string, password: string) => void;
 }
 
 function Login({ onToggleMode, onSubmit }: LoginProps) {

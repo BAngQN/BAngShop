@@ -81,7 +81,9 @@ function ProductDetail({ onAddToCart }: ProductDetailProps) {
                                 <p className="product-detail__brand">
                                     {product.brand}
                                 </p>
-                                <p className="product-detail__price">0 ₫</p>
+                                <p className="product-detail__price">
+                                    {product.price.toLocaleString("vi-VN")} ₫
+                                </p>
 
                                 <div className="product-detail__stock">
                                     <span className="product-detail__stock-badge product-detail__stock-badge--in-stock">

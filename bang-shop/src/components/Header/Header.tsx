@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
     cartItemCount?: number;
@@ -27,9 +28,9 @@ function Header({
     return (
         <header className="header">
             <div className="header__container">
-                <a href="/" className="header__logo">
+                <Link className="header__logo" to="/" replace>
                     Bang Shop
-                </a>
+                </Link>
 
                 <form
                     className="header__search"

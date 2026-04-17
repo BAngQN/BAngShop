@@ -74,3 +74,17 @@
 .auth-form__toggle-btn:hover {
     text-decoration: underline;
 }
+
+.auth-form__input--error {
+    border-color: #e53e3e;
+}
+
+.auth-form__input--error:focus {
+    border-color: #e53e3e;
+}
+
+.auth-form__error {
+    font-size: 0.78rem;
+    color: #e53e3e;
+    margin-top: 2px;
+}

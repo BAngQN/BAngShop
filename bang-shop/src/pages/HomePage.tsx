@@ -16,6 +16,7 @@ import { CategoryValue } from "../types/Product";
 import { isValidCategory } from "../utils/utils";
 import "./HomePage.css";
 import { useEffect } from "react";
+import React from "react";
 
 const categories = [...Object.values(CategoryValue)];
 
@@ -32,14 +33,19 @@ function HomePage({ onAddToCart }: HomePageProps) {
     const hasNextPage = page !== null && pages !== null ? page < pages : false;
     const dispatch = useAppDispatch();
     const navigator = useNavigate();
+    const [isLoading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState(null as string | null);
+    const [isTrying, setIsTrying] = React.useState(0);
     useEffect(() => {
         let isRunning = true;
         const fetchProducts = async () => {
+            setLoading(true);
             const response = searchQuery.trim()
                 ? await productApi.searchProducts(searchQuery, page, 5)
                 : await productApi.getProducts(page, currentCategory, 5);
             if (response.type === "success") {
                 if (isRunning) {
+                    setLoading(false);
                     dispatch(
                         productSlices.actions.addProducts({
                             items: response.data.items,
@@ -48,13 +54,16 @@ function HomePage({ onAddToCart }: HomePageProps) {
                         }),
                     );
                 }
+            } else {
+                setError(response.message);
+                setLoading(false);
             }
         };
         fetchProducts();
         return () => {
             isRunning = false;
         };
-    }, [dispatch, page, currentCategory, searchQuery]);
+    }, [dispatch, page, currentCategory, searchQuery, isTrying]);
     const isDisabledPreviousPage = page === null || page === 1;
     const isDisabledNextPage = !hasNextPage;
     const handleClickNextPage = () => {
@@ -74,6 +83,35 @@ function HomePage({ onAddToCart }: HomePageProps) {
     const handleOnViewDetail = (productId: string) => {
         navigator("/product/" + productId);
     };
+
+    const handleTryAgain = () => {
+        setError(null);
+        setIsTrying((prev) => prev + 1);
+    };
+
+    if (isLoading) {
+        return (
+            <div className="loader-container">
+                <div className="loader"></div>
+            </div>
+        );
+    }
+    if (error) {
+        return (
+            <div className="home-page__error">
+                <span className="home-page__error-icon">⚠️</span>
+                <h2 className="home-page__error-title">Something went wrong</h2>
+                <p className="home-page__error-message">{error}</p>
+                <button
+                    className="home-page__error-retry"
+                    type="button"
+                    onClick={handleTryAgain}
+                >
+                    Try Again
+                </button>
+            </div>
+        );
+    }
     return (
         <div className="home-page">
             <div className="home-page__container">
