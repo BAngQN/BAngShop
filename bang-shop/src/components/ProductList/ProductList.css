@@ -1,0 +1,18 @@
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    flex: 1;
+}
+
+.product-list--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.product-list__empty-text {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+}

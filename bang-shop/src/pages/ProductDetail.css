@@ -1,0 +1,221 @@
+.product-detail {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+.product-detail__container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.product-detail__back {
+    background: none;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    padding: 0;
+    align-self: flex-start;
+}
+
+.product-detail__back:hover {
+    text-decoration: underline;
+}
+
+.product-detail__layout {
+    display: flex;
+    gap: 32px;
+}
+
+.product-detail__image {
+    width: 400px;
+    flex-shrink: 0;
+    background: #f1f5f9;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    overflow: hidden;
+    padding: 24px;
+}
+
+.product-detail__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-detail__image-placeholder {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.product-detail__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-detail__category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+}
+
+.product-detail__name {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.product-detail__brand {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.product-detail__price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-danger);
+    margin-top: 8px;
+}
+
+.product-detail__stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.product-detail__stock-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.product-detail__stock-badge--in-stock {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.product-detail__stock-badge--out-of-stock {
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.product-detail__stock-count {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.product-detail__description {
+    margin-top: 12px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+.product-detail__add-btn {
+    margin-top: 20px;
+    padding: 14px 32px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    align-self: flex-start;
+}
+
+.product-detail__add-btn:hover {
+    background: var(--color-primary-hover);
+}
+
+.product-detail__specs {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+.product-detail__specs-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.product-detail__specs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-detail__specs-row:not(:last-child) {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.product-detail__specs-key {
+    padding: 10px 12px;
+    font-weight: 500;
+    width: 200px;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.product-detail__specs-value {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+}
+
+.product-card__add-btn--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Error state */
+.product-detail__error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 48px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-align: center;
+}
+
+.product-detail__error-icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.product-detail__error-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.product-detail__error-message {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    max-width: 360px;
+    line-height: 1.6;
+}
+
+.product-detail__error-back-btn {
+    margin-top: 8px;
+    padding: 10px 24px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.product-detail__error-back-btn:hover {
+    background: var(--color-primary-hover);
+}
