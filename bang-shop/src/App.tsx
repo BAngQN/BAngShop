@@ -5,16 +5,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CartPage from "./pages/CartPage";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./store/store";
+import { useAppDispatch } from "./store/store";
 import productFilterSlices from "./components/ProductList/productFilterSlices";
 import authSlice from "./components/AuthForm/authSlice";
-import { authenticationApi, cartApi, productApi } from "./services/mockApi";
-import {
-    authenticatorSelector,
-    cartCountSelector,
-    cartSelector,
-    userSelector,
-} from "./store/selectors";
+import { authenticationApi, cartApi } from "./services/mockApi";
+import { useUserAuthentication } from "./hook/userAuthentication";
+import { useCart } from "./hook/userCart";
 
 function App() {
     return (
@@ -27,10 +23,12 @@ function App() {
 function AppComponentWrapper() {
     const dispatch = useAppDispatch();
     const navigator = useNavigate();
-    const isLoggedIn = useAppSelector(authenticatorSelector);
-    const user = useAppSelector(userSelector);
-    const cart = useAppSelector(cartSelector);
-    const cartCount = useAppSelector(cartCountSelector);
+    const useAuthentication = useUserAuthentication();
+    const userCart = useCart();
+    const isLoggedIn = useAuthentication.isLoggedIn;
+    const user = useAuthentication.user;
+    const cart = userCart.cart;
+    const cartCount = userCart.cartCount;
 
     const handleSearchSubmit = (query: string) => {
         navigator("/");
@@ -42,26 +40,16 @@ function AppComponentWrapper() {
     };
 
     const handleSubmitLogin = async (email: string, password: string) => {
-        const response = await authenticationApi.login(email, password);
-        if (response.type === "success") {
-            dispatch(
-                authSlice.actions.login({
-                    user: {
-                        id: response.data.id,
-                        username: response.data.username,
-                    },
-                    cart: response.data.cart,
-                }),
-            );
-            navigator("/");
-        } else {
-            alert(response.message);
-        }
+        useAuthentication.handleLogin(email, password);
     };
 
-    const handleSubmitRegister = async (email: string, password: string) => {
+    const handleSubmitRegister = async (
+        userName: string,
+        email: string,
+        password: string,
+    ) => {
         const response = await authenticationApi.register(
-            email.split("@")[0],
+            userName,
             email,
             password,
         );
@@ -74,8 +62,7 @@ function AppComponentWrapper() {
     };
 
     const handleLogout = () => {
-        dispatch(authSlice.actions.logout());
-        navigator("/");
+        useAuthentication.handleLogout();
     };
 
     const handleAddToCart = async (productId: string) => {
@@ -83,27 +70,11 @@ function AppComponentWrapper() {
             navigator("/login");
             return;
         }
-        const productResponse = await productApi.getProductById(productId);
-        if (productResponse.type !== "success") return;
-        const product = productResponse.data;
-        const response = await cartApi.addCartItem(user.id, {
-            productId: product.id,
-            name: product.name,
-            price: product.price,
-            imageUrl: product.imageUrl,
-            quantity: 1,
-        });
-        if (response.type === "success") {
-            dispatch(authSlice.actions.setCart(response.data));
-        }
+        userCart.addToCart(productId);
     };
 
     const handleCartClick = () => {
-        if (!isLoggedIn) {
-            navigator("/login");
-        } else {
-            navigator("/cart");
-        }
+        userCart.onCartClick(isLoggedIn);
     };
 
     const handleQuantityChange = async (

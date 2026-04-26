@@ -2,7 +2,7 @@ import AuthForm from "../components/AuthForm/AuthForm";
 
 interface RegisterProps {
     onToggleMode?: () => void;
-    onSubmit?: (email: string, password: string) => void;
+    onSubmit?: (userName: string, email: string, password: string) => void;
 }
 
 function Register({ onToggleMode, onSubmit }: RegisterProps) {

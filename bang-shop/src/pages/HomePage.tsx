@@ -40,6 +40,7 @@ function HomePage({ onAddToCart }: HomePageProps) {
         let isRunning = true;
         const fetchProducts = async () => {
             setLoading(true);
+            setError(null);
             const response = searchQuery.trim()
                 ? await productApi.searchProducts(searchQuery, page, 5)
                 : await productApi.getProducts(page, currentCategory, 5);

@@ -126,6 +126,11 @@ export const authenticationApi = {
             const currentUser = users.find(
                 (user) => user.email === email && user.password === password,
             );
+            console.log("Login attempt:", {
+                email,
+                password,
+                success: !!currentUser,
+            });
             if (currentUser) {
                 return {
                     type: "success",

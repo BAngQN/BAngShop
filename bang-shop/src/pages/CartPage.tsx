@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
 import type { CartItemData } from "../types/Cart";
 import "./CartPage.css";
@@ -30,9 +31,9 @@ function CartPage({
                         <p className="cart-page__empty-text">
                             Your cart is empty.
                         </p>
-                        <a href="/" className="cart-page__continue-btn">
+                        <Link to="/" className="cart-page__continue-btn">
                             Continue Shopping
-                        </a>
+                        </Link>
                     </div>
                 ) : (
                     <div className="cart-page__layout">

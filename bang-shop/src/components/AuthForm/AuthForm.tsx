@@ -1,11 +1,21 @@
 import "./AuthForm.css";
 import { useForm } from "react-hook-form";
 
-interface AuthFormProps {
-    mode: "login" | "register";
-    onSubmit?: (email: string, password: string) => void;
-    onToggleMode?: () => void;
-}
+type AuthFormProps =
+    | {
+          mode: "login";
+          onSubmit?: (email: string, password: string) => void;
+          onToggleMode?: () => void;
+      }
+    | {
+          mode: "register";
+          onSubmit?: (
+              userName: string,
+              email: string,
+              password: string,
+          ) => void;
+          onToggleMode?: () => void;
+      };
 
 interface RegisterFields {
     username: string;
@@ -28,7 +38,11 @@ function AuthForm({ mode, onSubmit, onToggleMode }: AuthFormProps) {
     });
 
     const onValid = (data: RegisterFields) => {
-        onSubmit?.(data.email, data.password);
+        if (mode === "login") {
+            onSubmit?.(data.email, data.password);
+        } else {
+            onSubmit?.(data.username, data.email, data.password);
+        }
     };
 
     return (
