@@ -1,0 +1,44 @@
+.category-filter {
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.category-filter__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.category-filter__list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.category-filter__btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    text-transform: capitalize;
+}
+
+.category-filter__btn:hover {
+    background: var(--color-border);
+    color: var(--color-text);
+}
+
+.category-filter__btn--active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.category-filter__btn--active:hover {
+    background: var(--color-primary-hover);
+    color: #fff;
+}

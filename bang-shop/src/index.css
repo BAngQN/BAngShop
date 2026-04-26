@@ -1,5 +1,109 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-text: #1e293b;
+    --color-text-secondary: #64748b;
+    --color-border: #e2e8f0;
+    --color-danger: #ef4444;
+    --color-success: #22c55e;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --max-width: 1200px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input {
+    font: inherit;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+    margin: auto;
+    width: 80px;
+    aspect-ratio: 1;
+    --c: no-repeat linear-gradient(#000 0 0);
+    background:
+        var(--c) 0% 50%,
+        var(--c) 50% 50%,
+        var(--c) 100% 50%;
+    background-size: 20% 100%;
+    animation: l1 1s infinite linear;
+}
+@keyframes l1 {
+    0% {
+        background-size:
+            20% 100%,
+            20% 100%,
+            20% 100%;
+    }
+    33% {
+        background-size:
+            20% 10%,
+            20% 100%,
+            20% 100%;
+    }
+    50% {
+        background-size:
+            20% 100%,
+            20% 10%,
+            20% 100%;
+    }
+    66% {
+        background-size:
+            20% 100%,
+            20% 100%,
+            20% 10%;
+    }
+    100% {
+        background-size:
+            20% 100%,
+            20% 100%,
+            20% 100%;
+    }
 }
